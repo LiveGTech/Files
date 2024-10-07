@@ -27,7 +27,8 @@ $g.waitForLoad().then(function() {
     );
 
     return $g.l10n.selectLocaleFromResources({
-        "en_GB": "locales/en_GB.json"
+        "en_GB": "locales/en_GB.json",
+        "fr_FR": "locales/fr_FR.json"
     });
 }).then(function(locale) {
     window._ = function() {
