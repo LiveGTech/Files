@@ -125,11 +125,13 @@ export var ManagerScreen = astronaut.component("ManagerScreen", function(props, 
                     });
 
                     page.clear().add(
-                        Message (
-                            Icon("error", "dark embedded") (),
-                            Heading(1) (_("places_mountError_title")),
-                            Paragraph() (_("places_mountError_description")),
-                            tryAgainButton
+                        Section (
+                            Message (
+                                Icon("error", "dark embedded") (),
+                                Heading(1) (_("places_mountError_title")),
+                                Paragraph() (_("places_mountError_description")),
+                                tryAgainButton
+                            )
                         )
                     );
 
