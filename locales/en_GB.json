@@ -6,6 +6,18 @@
         "textDirection": "ltr"
     },
     "source": {
-        "files": "Files"
+        "files": "Files",
+
+        "tryAgain": "Try again",
+        "openMenu": "Open menu",
+        "loadingEntries": "Loading entries...",
+
+        "places": "Places",
+
+        "places_local": "Local files",
+
+        "places_blankMessage": "Select a location to show.",
+        "places_mountError_title": "Cannot access this place",
+        "places_mountError_description": "Try mounting this place again to access its files."
     }
 }

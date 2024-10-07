@@ -6,6 +6,18 @@
         "textDirection": "ltr"
     },
     "source": {
-        "files": "Fichiers"
+        "files": "Fichiers",
+
+        "tryAgain": "Réessayer",
+        "openMenu": "Ouvrir le menu",
+        "loadingEntries": "Chargement des entrées...",
+
+        "places": "Endroits",
+
+        "places_local": "Fichiers locaux",
+
+        "places_blankMessage": "Sélectionnez un endroit à afficher.",
+        "places_mountError_title": "Impossible d'accéder à cet endroit",
+        "places_mountError_description": "Essayez de monter à nouveau cet endroit pour accéder à ses fichiers."
     }
 }

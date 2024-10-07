@@ -8,6 +8,7 @@
 */
 
 import * as common from "./common.js";
+import * as manager from "./manager.js";
 
 var $g = await import(`${common.AUI_URL_PREFIX}/src/adaptui.js`);
 var astronaut = await import(`${common.AUI_URL_PREFIX}/astronaut/astronaut.js`);
@@ -35,15 +36,13 @@ $g.waitForLoad().then(function() {
 
     $g.sel("title").setText(_("files"));
 
-    astronaut.render(Screen(true) (
-        Header (
-            Text(_("files"))
-        ),
-        Page(true) (
-            Section (
-                Heading() ("Hello, world!"),
-                Paragraph() ("Welcome to the Files app!")
-            )
-        )
-    ));
+    astronaut.render(manager.ManagerScreen({showing: true}) ());
+
+    var opened = false;
+
+    $g.sel("body").on("click", function() {
+        if (opened) {
+            return;
+        }
+    });
 });
