@@ -14,6 +14,14 @@ export class Entry {
         this.parentPath = parentPath;
     }
 
+    async getSize() {
+        return null;
+    }
+
+    async getLastModified() {
+        return null;
+    }
+
     visit() {
         this.filesystem.currentPath = [...this.parentPath, this.name];
     }

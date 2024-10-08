@@ -9,6 +9,30 @@
 
 import * as fs from "../fs.js";
 
+export class LocalFileEntry extends fs.FileEntry {
+    constructor(handle, filesystem, parentPath) {
+        super(handle.name, filesystem, parentPath);
+
+        this._handle = handle;
+    }
+
+    async getSize() {
+        return (await this._handle.getFile()).size;
+    }
+
+    async getLastModified() {
+        return (await this._handle.getFile()).lastModifiedDate;
+    }
+}
+
+export class LocalFolderEntry extends fs.FolderEntry {
+    constructor(handle, filesystem, parentPath) {
+        super(handle.name, filesystem, parentPath);
+
+        this._handle = handle;
+    }
+}
+
 export class LocalFilesystem extends fs.Filesystem {
     constructor(name) {
         super(name);
@@ -53,7 +77,7 @@ export class LocalFilesystem extends fs.Filesystem {
         if (handle.kind == "directory") {
             return {
                 type: "folder",
-                list: (await Array.fromAsync(await handle.values())).map((childHandle) => new (childHandle.kind == "directory" ? fs.FolderEntry : fs.FileEntry)(childHandle.name, this, this.currentPath))
+                list: (await Array.fromAsync(await handle.values())).map((childHandle) => new (childHandle.kind == "directory" ? LocalFolderEntry : LocalFileEntry)(childHandle, this, this.currentPath))
             };
         }
 

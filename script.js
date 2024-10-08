@@ -13,6 +13,8 @@ import * as manager from "./manager.js";
 var $g = await import(`${common.AUI_URL_PREFIX}/src/adaptui.js`);
 var astronaut = await import(`${common.AUI_URL_PREFIX}/astronaut/astronaut.js`);
 
+export var currentLocale = null;
+
 window.$g = $g;
 
 astronaut.unpack();
@@ -31,8 +33,14 @@ $g.waitForLoad().then(function() {
         "fr_FR": "locales/fr_FR.json"
     });
 }).then(function(locale) {
+    currentLocale = locale;
+
     window._ = function() {
         return locale.translate(...arguments);
+    };
+
+    window._format = function() {
+        return locale.format(...arguments);
     };
 
     $g.sel("title").setText(_("files"));

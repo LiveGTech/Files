@@ -12,12 +12,36 @@
         "openMenu": "Ouvrir le menu",
         "loadingEntries": "Chargement des entrées...",
 
+        "size_bytes": {
+            "{size} == 1": "{size} octet",
+            "{size} != 1": "{size} octets"
+        },
+        "size_kb": "{size} Ko",
+        "size_mb": "{size} Mo",
+        "size_gb": "{size} Go",
+        "size_tb": "{size} To",
+        "size_kib": "{size} Kio",
+        "size_mib": "{size} Mio",
+        "size_gib": "{size} Gio",
+        "size_tib": "{size} Tio",
+
         "places": "Endroits",
 
         "places_local": "Fichiers locaux",
 
         "places_blankMessage": "Sélectionnez un endroit à afficher.",
         "places_mountError_title": "Impossible d'accéder à cet endroit",
-        "places_mountError_description": "Essayez de monter à nouveau cet endroit pour accéder à ses fichiers."
+        "places_mountError_description": "Essayez de monter à nouveau cet endroit pour accéder à ses fichiers.",
+
+        "prop_name": "Nom",
+        "prop_size": "Taille",
+        "prop_lastModified": "Dernière modifié",
+
+        "prop_type": "Type",
+        "prop_type_file": "Fichier",
+        "prop_type_fileWithExtension": "Fichier {extension}",
+        "prop_type_hiddenFile": "Fichier caché",
+        "prop_type_folder": "Dossier",
+        "prop_type_hiddenFolder": "Dossier caché"
     }
 }

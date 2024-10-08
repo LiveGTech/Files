@@ -12,12 +12,36 @@
         "openMenu": "Open menu",
         "loadingEntries": "Loading entries...",
 
+        "size_bytes": {
+            "{size} == 1": "{size} byte",
+            "{size} != 1": "{size} bytes"
+        },
+        "size_kb": "{size} KB",
+        "size_mb": "{size} MB",
+        "size_gb": "{size} GB",
+        "size_tb": "{size} TB",
+        "size_kib": "{size} KiB",
+        "size_mib": "{size} MiB",
+        "size_gib": "{size} GiB",
+        "size_tib": "{size} TiB",
+
         "places": "Places",
 
         "places_local": "Local files",
 
         "places_blankMessage": "Select a location to show.",
         "places_mountError_title": "Cannot access this place",
-        "places_mountError_description": "Try mounting this place again to access its files."
+        "places_mountError_description": "Try mounting this place again to access its files.",
+
+        "prop_name": "Name",
+        "prop_size": "Size",
+        "prop_lastModified": "Last modified",
+
+        "prop_type": "Type",
+        "prop_type_file": "File",
+        "prop_type_fileWithExtension": "{extension} file",
+        "prop_type_hiddenFile": "Hidden file",
+        "prop_type_folder": "Folder",
+        "prop_type_hiddenFolder": "Hidden folder"
     }
 }

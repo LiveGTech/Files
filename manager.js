@@ -8,9 +8,13 @@
 */
 
 import * as common from "./common.js";
-import * as localFsProvider from "./providers/local.js"
+import * as files from "./script.js";
+import * as fs from "./fs.js";
+import * as localFsProvider from "./providers/local.js";
 
+var sizeUnits = await import(`${common.AUI_URL_PREFIX}/src/sizeunits.js`);
 var astronaut = await import(`${common.AUI_URL_PREFIX}/astronaut/astronaut.js`);
+var listViews = await import(`${common.AUI_URL_PREFIX}/astronaut/assemblies/listviews/listviews.js`);
 
 window.astronaut = astronaut;
 
@@ -140,6 +144,89 @@ export var ManagerScreen = astronaut.component("ManagerScreen", function(props, 
             }
 
             console.log(await provider.access()); // TODO: Populate table with entries
+
+            var entry = await provider.access();
+
+            if (entry.type != "folder") {
+                throw new Error("Not implemented");
+            }
+
+            var listItems = {};
+            var collator = files.currentLocale.createCollator();
+
+            var sortedList = entry.list.sort(function(a, b) {
+                if (a instanceof fs.FolderEntry && b instanceof fs.FileEntry) {
+                    return -1;
+                }
+
+                if (a instanceof fs.FileEntry && b instanceof fs.FolderEntry) {
+                    return 1;
+                }
+
+                return collator.compare(a.name, b.name);
+            });
+
+            for await (var item of sortedList) {
+                var nameParts = item.name.split(".");
+                var displayType = item instanceof fs.FolderEntry ? _("prop_type_folder") : _("prop_type_file");
+
+                if (item instanceof fs.FileEntry && nameParts.length > 1) {
+                    if (nameParts[0] == "") {
+                        displayType = _("prop_type_hiddenFile");
+                    } else {
+                        displayType = _("prop_type_fileWithExtension", {extension: nameParts.at(-1).toLocaleUpperCase()});
+                    }
+                }
+
+                if (item instanceof fs.FolderEntry && nameParts.length > 1 && nameParts[0] == "") {
+                    displayType = _("prop_type_hiddenFolder");
+                }
+
+                var size = await item.getSize();
+                var displaySize = "";
+
+                if (size) {
+                    displaySize = sizeUnits.getString(size, _);
+                }
+
+                var lastModified = await item.getLastModified();
+                var displayLastModified = "";
+
+                if (lastModified) {
+                    // TODO: Display as relative time (implement in Adapt UI, like how `sizeUnits` is)
+                    displayLastModified = _format(lastModified);
+                }
+
+                listItems[item.name] = {
+                    name: item.name,
+                    displayType,
+                    displaySize,
+                    displayLastModified
+                };
+            }
+
+            var listView = listViews.ListView({
+                mode: "truncate",
+                items: listItems,
+                keyOrder: ["name", "displayType", "displaySize", "displayLastModified"]
+            }) (
+                TableHeaderCell({
+                    mode: "resize",
+                    styles: {
+                        "width": "100%"
+                    }
+                }) (_("prop_name")),
+                TableHeaderCell({mode: "resize"}) (_("prop_type")),
+                TableHeaderCell({mode: "resize"}) (_("prop_size")),
+                TableHeaderCell({mode: "resize"}) (_("prop_lastModified"))
+            );
+
+            page.clear().add(
+                Section({mode: "wide"}) (
+                    Heading(1) (entryDisplayName),
+                    listView
+                )
+            );
         }
 
         function visit() {
