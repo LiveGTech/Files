@@ -61,7 +61,9 @@ export class LocalFilesystem extends fs.Filesystem {
         var handle = this._handle;
 
         while (path.length > 0) {
-            handle = (await handle.values()).find((childHandle) => childHandle.name == path[0]);
+            handle = (await Array.fromAsync(await handle.values())).find((childHandle) => childHandle.name == path[0]);
+
+            path.shift();
 
             if (!handle) {
                 return null;
@@ -73,6 +75,10 @@ export class LocalFilesystem extends fs.Filesystem {
 
     async access() {
         var handle = await this._getCurrentPathHandle();
+
+        if (handle == null) {
+            return null;
+        }
 
         if (handle.kind == "directory") {
             return {

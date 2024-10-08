@@ -143,18 +143,19 @@ export var ManagerScreen = astronaut.component("ManagerScreen", function(props, 
                 }
             }
 
-            console.log(await provider.access()); // TODO: Populate table with entries
+            console.log(await provider.access()); // TODO: Remove once rendering implementation is complete
 
-            var entry = await provider.access();
+            var currentEntry = await provider.access();
 
-            if (entry.type != "folder") {
+            if (currentEntry.type != "folder") {
                 throw new Error("Not implemented");
             }
 
             var listItems = {};
+            var entries = {};
             var collator = files.currentLocale.createCollator();
 
-            var sortedList = entry.list.sort(function(a, b) {
+            var sortedList = currentEntry.list.sort(function(a, b) {
                 if (a instanceof fs.FolderEntry && b instanceof fs.FileEntry) {
                     return -1;
                 }
@@ -166,11 +167,11 @@ export var ManagerScreen = astronaut.component("ManagerScreen", function(props, 
                 return collator.compare(a.name, b.name);
             });
 
-            for await (var item of sortedList) {
-                var nameParts = item.name.split(".");
-                var displayType = item instanceof fs.FolderEntry ? _("prop_type_folder") : _("prop_type_file");
+            for await (var entry of sortedList) {
+                var nameParts = entry.name.split(".");
+                var displayType = entry instanceof fs.FolderEntry ? _("prop_type_folder") : _("prop_type_file");
 
-                if (item instanceof fs.FileEntry && nameParts.length > 1) {
+                if (entry instanceof fs.FileEntry && nameParts.length > 1) {
                     if (nameParts[0] == "") {
                         displayType = _("prop_type_hiddenFile");
                     } else {
@@ -178,18 +179,18 @@ export var ManagerScreen = astronaut.component("ManagerScreen", function(props, 
                     }
                 }
 
-                if (item instanceof fs.FolderEntry && nameParts.length > 1 && nameParts[0] == "") {
+                if (entry instanceof fs.FolderEntry && nameParts.length > 1 && nameParts[0] == "") {
                     displayType = _("prop_type_hiddenFolder");
                 }
 
-                var size = await item.getSize();
+                var size = await entry.getSize();
                 var displaySize = "";
 
                 if (size) {
                     displaySize = sizeUnits.getString(size, _);
                 }
 
-                var lastModified = await item.getLastModified();
+                var lastModified = await entry.getLastModified();
                 var displayLastModified = "";
 
                 if (lastModified) {
@@ -197,8 +198,10 @@ export var ManagerScreen = astronaut.component("ManagerScreen", function(props, 
                     displayLastModified = _format(lastModified);
                 }
 
-                listItems[item.name] = {
-                    name: item.name,
+                entries[entry.name] = entry;
+
+                listItems[entry.name] = {
+                    name: entry.name,
                     displayType,
                     displaySize,
                     displayLastModified
@@ -220,6 +223,16 @@ export var ManagerScreen = astronaut.component("ManagerScreen", function(props, 
                 TableHeaderCell({mode: "resize"}) (_("prop_size")),
                 TableHeaderCell({mode: "resize"}) (_("prop_lastModified"))
             );
+
+            listView.on("activaterow", function(event) {
+                var entry = entries[event.detail.key];
+
+                if (entry instanceof fs.FolderEntry) {
+                    provider.visit(event.detail.key);
+
+                    render();
+                }
+            });
 
             page.clear().add(
                 Section({mode: "wide"}) (
