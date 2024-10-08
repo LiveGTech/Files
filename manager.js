@@ -98,14 +98,15 @@ export var ManagerScreen = astronaut.component("ManagerScreen", function(props, 
                         }) (
                             TableHeader (
                                 TableRow (
+                                    SkeletonTableHeaderCell({width: "55%"}) (),
                                     SkeletonTableHeaderCell({width: "15%"}) (),
-                                    SkeletonTableHeaderCell({width: "60%"}) (),
-                                    SkeletonTableHeaderCell({width: "25%"}) ()
+                                    SkeletonTableHeaderCell({width: "15%"}) (),
+                                    SkeletonTableHeaderCell({width: "15%"}) ()
                                 )
                             ),
                             TableMain (
-                                ...astronaut.repeat(3, TableRow (
-                                    ...astronaut.repeat(3, TableCell() (
+                                ...astronaut.repeat(10, TableRow (
+                                    ...astronaut.repeat(4, TableCell() (
                                         TextFragment({
                                             attributes: {
                                                 "aui-skeletontext": true
