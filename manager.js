@@ -36,6 +36,7 @@ var SkeletonTableHeaderCell = astronaut.component("SkeletonTableHeaderCell", fun
 });
 
 export var ManagerScreen = astronaut.component("ManagerScreen", function(props, children) {
+    var backButton = IconButton("back", _("back")) ();
     var headerCurrentFolderName = TextFragment() (_("files"));
     var pageMenuButtonContainer = Container() ();
 
@@ -44,6 +45,7 @@ export var ManagerScreen = astronaut.component("ManagerScreen", function(props, 
     var screen = Screen(props) (
         Header (
             HeaderPageMenuButton({alt: _("openMenu")}) (),
+            backButton,
             headerCurrentFolderName
         ),
         PageMenu (
@@ -66,6 +68,12 @@ export var ManagerScreen = astronaut.component("ManagerScreen", function(props, 
             )
         )
     );
+
+    var currentBackAction = function() {};
+
+    backButton.on("click", function() {
+        currentBackAction();
+    });
 
     function addProvider(provider) {
         var page = Page() (
@@ -142,8 +150,6 @@ export var ManagerScreen = astronaut.component("ManagerScreen", function(props, 
                     return;
                 }
             }
-
-            console.log(await provider.access()); // TODO: Remove once rendering implementation is complete
 
             var currentEntry = await provider.access();
 
@@ -240,6 +246,12 @@ export var ManagerScreen = astronaut.component("ManagerScreen", function(props, 
                     listView
                 )
             );
+
+            currentBackAction = function() {
+                provider.up();
+
+                render();
+            };
         }
 
         function visit() {

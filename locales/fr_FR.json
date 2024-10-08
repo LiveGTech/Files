@@ -8,6 +8,7 @@
     "source": {
         "files": "Fichiers",
 
+        "back": "Précédent",
         "tryAgain": "Réessayer",
         "openMenu": "Ouvrir le menu",
         "loadingEntries": "Chargement des entrées...",

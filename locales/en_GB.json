@@ -8,6 +8,7 @@
     "source": {
         "files": "Files",
 
+        "back": "Back",
         "tryAgain": "Try again",
         "openMenu": "Open menu",
         "loadingEntries": "Loading entries...",
