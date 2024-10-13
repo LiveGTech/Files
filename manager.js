@@ -193,14 +193,14 @@ export var ManagerScreen = astronaut.component("ManagerScreen", function(props, 
                 var size = await entry.getSize();
                 var displaySize = "";
 
-                if (size) {
+                if (size != null) {
                     displaySize = sizeUnits.getString(size, _);
                 }
 
                 var lastModified = await entry.getLastModified();
                 var displayLastModified = "";
 
-                if (lastModified) {
+                if (lastModified != null) {
                     // TODO: Display as relative time (implement in Adapt UI, like how `sizeUnits` is)
                     displayLastModified = _format(lastModified);
                 }

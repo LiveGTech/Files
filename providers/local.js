@@ -17,11 +17,23 @@ export class LocalFileEntry extends fs.FileEntry {
     }
 
     async getSize() {
-        return (await this._handle.getFile()).size;
+        try {
+            return (await this._handle.getFile()).size;
+        } catch (error) {
+            console.warn(error);
+
+            return null;
+        }
     }
 
     async getLastModified() {
-        return (await this._handle.getFile()).lastModifiedDate;
+        try {
+            return (await this._handle.getFile()).lastModifiedDate;
+        } catch (error) {
+            console.warn(error);
+
+            return null;
+        }
     }
 }
 
