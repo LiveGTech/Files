@@ -50,6 +50,7 @@ export class LocalFilesystem extends fs.Filesystem {
         super(name);
 
         this._handle = null;
+        this._pathHandleCache = {};
     }
 
     async mount() {
@@ -71,18 +72,27 @@ export class LocalFilesystem extends fs.Filesystem {
 
         var path = [...this.currentPath];
         var handle = this._handle;
+        var cachedHandle = this._pathHandleCache[path.join("/")];
 
-        while (path.length > 0) {
-            handle = (await Array.fromAsync(await handle.values())).find((childHandle) => childHandle.name == path[0]);
-
-            path.shift();
-
-            if (!handle) {
-                return null;
-            }
+        if (cachedHandle) {
+            return cachedHandle;
         }
 
-        return handle;
+        try {
+            while (path.length > 0) {
+                handle = await handle.getDirectoryHandle(path[0]);
+
+                path.shift();
+            }
+
+            this._pathHandleCache[path.join("/")] = handle;
+
+            return handle;
+        } catch (error) {
+            console.warn(error);
+
+            return null;
+        }
     }
 
     async access() {
