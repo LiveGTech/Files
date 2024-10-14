@@ -72,7 +72,7 @@ export class LocalFilesystem extends fs.Filesystem {
 
         var path = [...this.currentPath];
         var handle = this._handle;
-        var cachedHandle = this._pathHandleCache[path.join("/")];
+        var cachedHandle = this._pathHandleCache[this.currentPath.join("/")];
 
         if (cachedHandle) {
             return cachedHandle;
@@ -85,7 +85,7 @@ export class LocalFilesystem extends fs.Filesystem {
                 path.shift();
             }
 
-            this._pathHandleCache[path.join("/")] = handle;
+            this._pathHandleCache[this.currentPath.join("/")] = handle;
 
             return handle;
         } catch (error) {
