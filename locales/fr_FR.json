@@ -29,6 +29,7 @@
         "places": "Endroits",
 
         "places_local": "Fichiers locaux",
+        "places_internal": "Stockage interne",
 
         "places_blankMessage": "Sélectionnez un endroit à afficher.",
         "places_mountError_title": "Impossible d'accéder à cet endroit",
