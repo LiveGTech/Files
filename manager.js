@@ -75,6 +75,7 @@ export var ManagerScreen = astronaut.component("ManagerScreen", function(props, 
         currentBackAction();
     });
 
+    // TODO: Make this a component
     function addProvider(provider) {
         var page = Page() (
             Section (
@@ -271,7 +272,13 @@ export var ManagerScreen = astronaut.component("ManagerScreen", function(props, 
         pageMenuButtonContainer.add(pageMenuButton);
     }
 
-    addProvider(new localFsProvider.LocalFilesystem(_("places_local")));
+    if (common.IS_SYSTEM_APP) {
+        addProvider(new localFsProvider.LocalFilesystem(_("places_internal")));
+
+        providerInfo[0].visit();
+    } else {
+        addProvider(new localFsProvider.LocalFilesystem(_("places_local")));
+    }
 
     return screen;
 });

@@ -29,6 +29,7 @@
         "places": "Places",
 
         "places_local": "Local files",
+        "places_internal": "Internal storage",
 
         "places_blankMessage": "Select a location to show.",
         "places_mountError_title": "Cannot access this place",
