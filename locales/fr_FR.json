@@ -9,6 +9,7 @@
         "files": "Fichiers",
 
         "back": "Précédent",
+        "forward": "Suivant",
         "tryAgain": "Réessayer",
         "openMenu": "Ouvrir le menu",
         "loadingEntries": "Chargement des entrées...",
@@ -25,6 +26,15 @@
         "size_mib": "{size} Mio",
         "size_gib": "{size} Gio",
         "size_tib": "{size} Tio",
+
+        "sortingOptions": "Options de tri",
+        "sortingOptions_ascending": "Ascendant",
+        "sortingOptions_descending": "Descendant",
+
+        "viewOptions": "Options d'affichage",
+        "viewOptions_showFoldersFirst": "Afficher les dossiers en premier",
+        "viewOptions_showFileExtensions": "Afficher les extensions de fichiers",
+        "viewOptions_showHiddenFiles": "Afficher les fichiers cachés",
 
         "places": "Endroits",
 

@@ -9,6 +9,7 @@
         "files": "Files",
 
         "back": "Back",
+        "forward": "Forward",
         "tryAgain": "Try again",
         "openMenu": "Open menu",
         "loadingEntries": "Loading entries...",
@@ -26,12 +27,22 @@
         "size_gib": "{size} GiB",
         "size_tib": "{size} TiB",
 
+        "sortingOptions": "Sorting options",
+        "sortingOptions_ascending": "Ascending",
+        "sortingOptions_descending": "Descending",
+
+        "viewOptions": "View options",
+        "viewOptions_showFoldersFirst": "Show folders first",
+        "viewOptions_showFileExtensions": "Show file extensions",
+        "viewOptions_showHiddenFiles": "Show hidden files",
+
         "places": "Places",
 
         "places_local": "Local files",
         "places_internal": "Internal storage",
 
         "places_blankMessage": "Select a location to show.",
+        "places_emptyFolderMessage": "Nothing in here yet...",
         "places_mountError_title": "Cannot access this place",
         "places_mountError_description": "Try mounting this place again to access its files.",
 
