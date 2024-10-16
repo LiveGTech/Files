@@ -42,6 +42,7 @@
         "places_internal": "Stockage interne",
 
         "places_blankMessage": "Sélectionnez un endroit à afficher.",
+        "places_emptyFolderMessage": "Rien ici pour l'instant...",
         "places_mountError_title": "Impossible d'accéder à cet endroit",
         "places_mountError_description": "Essayez de monter à nouveau cet endroit pour accéder à ses fichiers.",
 

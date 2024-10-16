@@ -27,6 +27,17 @@ var viewOptions = {
     showHiddenFiles: false
 };
 
+if (
+    (window.innerWidth <= 950 && window.innerWidth > 800) ||
+    window.innerWidth <= 650
+) {
+    viewOptions.showProps = ["name", "type"];
+}
+
+if (window.innerWidth <= 450) {
+    viewOptions.showProps = ["name"];
+}
+
 var SkeletonTableHeaderCell = astronaut.component("SkeletonTableHeaderCell", function(props, children) {
     return TableHeaderCell({
         styles: {
@@ -56,11 +67,20 @@ export var ProviderPage = astronaut.component("ProviderPage", function(props, ch
     inter.render = async function() {
         var entryDisplayName = props.provider.entryName ?? props.provider.name;
 
+        var entryHeading = Heading({
+            level: 1,
+            styles: {
+                "overflow": "hidden",
+                "white-space": "nowrap",
+                "text-overflow": "ellipsis"
+            }
+        }) (entryDisplayName);
+
         // Create skeleton loader
 
         page.clear().add(
             Section({mode: "wide"}) (
-                Heading(1) (entryDisplayName),
+                entryHeading,
                 SkeletonLoader({alt: _("loadingEntries")}) (
                     Table({
                         styles: {
@@ -232,7 +252,7 @@ export var ProviderPage = astronaut.component("ProviderPage", function(props, ch
         if (Object.keys(listItems).length == 0) {
             page.clear().add(
                 Section({mode: "wide"}) (
-                    Heading(1) (entryDisplayName),
+                    entryHeading,
                     Message (
                         Icon("folder", "dark embedded") (),
                         Paragraph() (_("places_emptyFolderMessage"))
@@ -316,7 +336,15 @@ export var ProviderPage = astronaut.component("ProviderPage", function(props, ch
 
 export var ManagerScreen = astronaut.component("ManagerScreen", function(props, children) {
     var backButton = IconButton("back", _("back")) ();
-    var forwardButton = IconButton("forward", _("forward")) ();
+
+    var forwardButton = IconButton({
+        icon: "forward",
+        alt: _("forward"),
+        attributes: {
+            "aui-display": "desktop"
+        }
+    }) ();
+
     var headerCurrentFolderName = TextFragment() (_("files"));
     var pageMenuButtonContainer = Container() ();
 
