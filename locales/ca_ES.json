@@ -1,0 +1,60 @@
+{
+    "localeCode": "ca_ES",
+    "metadata": {
+        "name": "Català (Espanya)",
+        "nameShort": "Català",
+        "textDirection": "ltr"
+    },
+    "source": {
+        "files": "Fitxers",
+
+        "back": "Enrere",
+        "forward": "Endavant",
+        "tryAgain": "Torna-ho a provar",
+        "openMenu": "Obre el menú",
+        "loadingEntries": "Carregant les entrades...",
+
+        "size_bytes": {
+            "{size} == 1": "{size} octet",
+            "{size} != 1": "{size} octets"
+        },
+        "size_kb": "{size} KB",
+        "size_mb": "{size} MB",
+        "size_gb": "{size} GB",
+        "size_tb": "{size} TB",
+        "size_kib": "{size} KiB",
+        "size_mib": "{size} MiB",
+        "size_gib": "{size} GiB",
+        "size_tib": "{size} TiB",
+
+        "sortingOptions": "Opcions d'ordenació",
+        "sortingOptions_ascending": "Ascendent",
+        "sortingOptions_descending": "Descendent",
+
+        "viewOptions": "Opcions de visualització",
+        "viewOptions_showFoldersFirst": "Mostra primer les carpetes",
+        "viewOptions_showFileExtensions": "Mostra les extensions dels fitxers",
+        "viewOptions_showHiddenFiles": "Mostra els fitxers ocults",
+
+        "places": "Llocs",
+
+        "places_local": "Fitxers locals",
+        "places_internal": "Emmagatzematge intern",
+
+        "places_blankMessage": "Seleccioneu una ubicació per mostrar.",
+        "places_emptyFolderMessage": "Encara no hi ha res aquí...",
+        "places_mountError_title": "No es pot accedir a aquest lloc",
+        "places_mountError_description": "Torneu a muntar aquest lloc per accedir als seus fitxers.",
+
+        "prop_name": "Nom",
+        "prop_size": "Mida",
+        "prop_lastModified": "Última modificació",
+
+        "prop_type": "Tipus",
+        "prop_type_file": "Fitxer",
+        "prop_type_fileWithExtension": "Fitxer {extension}",
+        "prop_type_hiddenFile": "Fitxer ocult",
+        "prop_type_folder": "Carpeta",
+        "prop_type_hiddenFolder": "Carpeta oculta"
+    }
+}
