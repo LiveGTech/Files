@@ -29,6 +29,7 @@ $g.waitForLoad().then(function() {
     );
 
     return $g.l10n.selectLocaleFromResources({
+        "ca_ES": "locales/ca_ES.json",
         "en_GB": "locales/en_GB.json",
         "fr_FR": "locales/fr_FR.json"
     });
